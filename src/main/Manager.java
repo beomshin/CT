@@ -2,6 +2,7 @@ package main;
 
 import ct.level2.CTCreateStar;
 import ct.level2.CTDictionary;
+import ct.level2.CTJumpTeleportation;
 
 import java.util.Arrays;
 import java.util.Scanner;
@@ -13,7 +14,7 @@ public class Manager {
 
 
 
-        System.out.println("1. 교점에 별 만들기, 2. 모음 사전");
+        System.out.println("1. 교점에 별 만들기, 2. 모음 사전, 3. 점프와 순간이동");
         System.out.print("번호 : ");
         int n = Integer.valueOf(sc.nextLine());
 
@@ -25,6 +26,9 @@ public class Manager {
                 break;
             case 2:
                 System.out.println(CTDictionary.solution("AAAAE"));
+                break;
+            case 3:
+                System.out.println(CTJumpTeleportation.solution(5000));
                 break;
         }
 
