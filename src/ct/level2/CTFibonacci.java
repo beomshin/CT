@@ -1,7 +1,7 @@
 package ct.level2;
 
 // 피보나치 수
-public class CTSu {
+public class CTFibonacci {
 
     public static int solution(int n) {
         int answer = 0;

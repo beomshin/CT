@@ -13,7 +13,7 @@ public class Manager {
 
 
         System.out.println("1. 교점에 별 만들기, 2. 모음 사전, 3. 점프와 순간이동, 4. n^2배열 자르기, 5. 쿼드압축 후 개수 세기");
-        System.out.println("6. JadenCase 문자열 만들기 7. 피보나치 수 8. N개의 최소공배수");
+        System.out.println("6. JadenCase 문자열 만들기 7. 피보나치 수 8. N개의 최소공배수 9, [3차] n진수 게임");
         System.out.print("번호 : ");
         int n = Integer.valueOf(sc.nextLine());
 
@@ -40,12 +40,14 @@ public class Manager {
                 System.out.println(CTJadenCase.solution("3people unFollowed me"));
                 break;
             case 7:
-                System.out.println(CTSu.solution(5));
+                System.out.println(CTFibonacci.solution(5));
                 break;
             case 8:
                 int[] s3 = {2,6,8,14};
                 System.out.println(CTLCM.solution(s3));
                 break;
+            case 9:
+                System.out.println(CTNGame.solution(2,4,2,1));
         }
 
     }
