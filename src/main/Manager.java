@@ -14,6 +14,7 @@ public class Manager {
 
         System.out.println("1. 교점에 별 만들기, 2. 모음 사전, 3. 점프와 순간이동, 4. n^2배열 자르기, 5. 쿼드압축 후 개수 세기");
         System.out.println("6. JadenCase 문자열 만들기 7. 피보나치 수 8. N개의 최소공배수 9, [3차] n진수 게임");
+        System.out.println("10. 땅따먹기");
         System.out.print("번호 : ");
         int n = Integer.valueOf(sc.nextLine());
 
@@ -48,6 +49,10 @@ public class Manager {
                 break;
             case 9:
                 System.out.println(CTNGame.solution(2,4,2,1));
+                break;
+            case 10:
+                int[][] s4 = {{1,2,3,5},{5,6,7,8},{4,3,2,1}};
+                System.out.println(CTEatTheGround.solution(s4));
         }
 
     }
