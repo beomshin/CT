@@ -38,9 +38,6 @@ public class CTArchery {
                 answer = new int[apache.length];
                 System.arraycopy(lion, 0 , answer, 0, answer.length);
             } else if(LION_SCORE == sum && sum != 0) {
-                System.out.println(Arrays.toString(answer));
-                System.out.println(Arrays.toString(lion));
-                System.out.println();
                 for(int i = lion.length - 1 ; i >=0 ; i--) {
                     if(lion[i] == 0 && answer[i] != 0) break;
                     if(lion[i] !=0 && lion[i] > answer[i]) {
