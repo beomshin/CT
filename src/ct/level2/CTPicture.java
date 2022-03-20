@@ -2,6 +2,7 @@ package ct.level2;
 
 import java.util.ArrayList;
 
+// 단체사진 찍기
 public class CTPicture {
 
     static String[] P = {"A", "C", "F", "J", "M", "N", "R", "T"};

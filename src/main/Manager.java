@@ -14,7 +14,7 @@ public class Manager {
 
         System.out.println("1. 교점에 별 만들기, 2. 모음 사전, 3. 점프와 순간이동, 4. n^2배열 자르기, 5. 쿼드압축 후 개수 세기");
         System.out.println("6. JadenCase 문자열 만들기 7. 피보나치 수 8. N개의 최소공배수 9, [3차] n진수 게임");
-        System.out.println("10. 땅따먹기 11. k진수에서 소수 개수 구하기 12. 양궁대회 13. 단체 사진 찍기");
+        System.out.println("10. 땅따먹기 11. k진수에서 소수 개수 구하기 12. 양궁대회 13. 단체 사진 찍기 14. 124 나라의 숫자");
         System.out.print("번호 : ");
         int n = Integer.valueOf(sc.nextLine());
 
@@ -64,6 +64,9 @@ public class Manager {
             case 13:
                 String[] data = {"N~F=0", "R~T>2"};
                 System.out.println(CTPicture.solution(2, data));
+                break;
+            case 14:
+                System.out.println(CT124.solution(6));
                 break;
         }
 
