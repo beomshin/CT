@@ -15,7 +15,7 @@ public class Manager {
         System.out.println("1. 교점에 별 만들기, 2. 모음 사전, 3. 점프와 순간이동, 4. n^2배열 자르기, 5. 쿼드압축 후 개수 세기");
         System.out.println("6. JadenCase 문자열 만들기 7. 피보나치 수 8. N개의 최소공배수 9, [3차] n진수 게임");
         System.out.println("10. 땅따먹기 11. k진수에서 소수 개수 구하기 12. 양궁대회 13. 단체 사진 찍기 14. 124 나라의 숫자");
-        System.out.println("15. 빛의 경로 사이클 16. 전화번호 목록");
+        System.out.println("15. 빛의 경로 사이클 16. 전화번호 목록 17, 배달 18, 위장");
         System.out.print("번호 : ");
         int n = Integer.valueOf(sc.nextLine());
 
@@ -76,6 +76,15 @@ public class Manager {
             case 16:
                 String[] s7 = {"119", "97674223", "1195524421"};
                 System.out.println(CTPhone.solution(s7));
+                break;
+            case 17:
+                int[][] s8 = {{1,2,1},{2,3,3},{5,2,2},{1,4,2},{5,3,1},{5,4,2}};
+                System.out.println(CTDelivery.solution(5, s8, 3));
+                break;
+            case 18:
+                String[][] s9 = {{"yellowhat", "headgear"}, {"bluesunglasses", "eyewear"}, {"green_turban", "headgear"}};
+                System.out.println(CTCamouflage.solution(s9));
+                break;
         }
 
     }
