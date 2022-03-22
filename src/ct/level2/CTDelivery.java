@@ -5,59 +5,45 @@ import java.util.*;
 // 배달
 public class CTDelivery {
 
-    static int[][] table;
-
     public static int solution(int N, int[][] road, int K) {
         int answer = 0;
-        table = new int[N][N];
-
-        for(int i=0; i < road.length; i++) {
-            table[road[i][0]-1][road[i][1]-1] = road[i][2];
-            table[road[i][1]-1][road[i][0]-1] = road[i][2];
-        }
-
-        for(int i=0; i < road.length; i++) {
-            if(K >= bfs(0, i, N)) {
-                answer++;
-            }
-            System.out.println();
-        }
-
+        int[] d = dijkstra(road, 1, N);
+        for(int n : d) if(K >= n) answer++;
         return answer;
     }
 
+    public static int[] dijkstra(int[][] road, int start, int N) {
+        PriorityQueue<int[]> queue = new PriorityQueue<>((a, b) -> a[0] - b[0]);
+        boolean[] visited = new boolean[N+1];
+        int[][] t = new int[N+1][N+1];
+        int[] dist = new int[N+1];
+        for(int i=0; i < dist.length; i++) {
+            dist[i] = Integer.MAX_VALUE;
+        }
+        for(int i=0; i < road.length; i++) {
+            if(t[road[i][0]][road[i][1]] == 0 || t[road[i][0]][road[i][1]] > road[i][2]) t[road[i][0]][road[i][1]] = road[i][2];
+            if(t[road[i][1]][road[i][0]] == 0 || t[road[i][1]][road[i][0]] > road[i][2]) t[road[i][1]][road[i][0]] = road[i][2];
+        }
 
-    public static int bfs(int s, int e, int N) {
-        int min = Integer.MAX_VALUE;
-        Queue<Integer> queue = new LinkedList<>();
-        HashMap<Integer, Integer> time = new HashMap<>();
-        boolean[] visited  = new boolean[N];
-        searchAdj(0, queue, N);
-        visited[0] = true;
+        dist[start] = 0;
+        queue.add(new int[]{start, 0});
 
         while (!queue.isEmpty()) {
 
-            int v = queue.remove();
+            int[] v = queue.poll();
+            int n = v[0];
 
-            if(visited[v] == false) {
-                System.out.println(v+1);
-                searchAdj(v, queue, N);
-                visited[v] = true;
+            for(int i=0 ; i < t.length ; i ++) {
+                if(t[n][i] !=0 && dist[i] > v[1] + t[n][i]) {
+                    queue.add(new int[]{i, v[1] + t[n][i]});
+                    dist[i] = v[1] + t[n][i];
+                }
             }
 
         }
 
-
-        return 0;
-    }
-
-    public static void searchAdj(int v, Queue<Integer> queue, int N) {
-
-        for(int i=0; i < N; i++) {
-            if(table[v][i] != 0) {
-                queue.add(i);
-            }
-        }
+        return dist;
 
     }
+
 }

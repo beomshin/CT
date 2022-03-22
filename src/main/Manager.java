@@ -78,8 +78,8 @@ public class Manager {
                 System.out.println(CTPhone.solution(s7));
                 break;
             case 17:
-                int[][] s8 = {{1,2,1},{2,3,3},{5,2,2},{1,4,2},{5,3,1},{5,4,2}};
-                System.out.println(CTDelivery.solution(5, s8, 3));
+                int[][] s8 =  {{1, 2, 1}, {1, 3, 2}, {2, 3, 2}, {3, 4, 3}, {3, 5, 2}, {3, 5, 3}, {5, 6, 1}};
+                System.out.println(CTDelivery.solution(6, s8, 4));
                 break;
             case 18:
                 String[][] s9 = {{"yellowhat", "headgear"}, {"bluesunglasses", "eyewear"}, {"green_turban", "headgear"}};
