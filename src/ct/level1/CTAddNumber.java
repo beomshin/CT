@@ -5,7 +5,7 @@ import java.util.HashSet;
 // 없는 숫자 더하기
 public class CTAddNumber {
 
-    public int solution(int[] numbers) {
+    public static int solution(int[] numbers) {
         int answer = -1;
         HashSet<Integer> set = new HashSet<>();
 
