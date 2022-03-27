@@ -17,6 +17,7 @@ public class Main {
             switch (n) {
                 case 1: Manger2.level2(sc);break;
                 case 2: Manager.level2(sc); break;
+                case 3: Manager3.level3(sc);break;
                 default: break;
             }
 
