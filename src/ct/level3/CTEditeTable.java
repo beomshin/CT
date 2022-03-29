@@ -1,79 +1,77 @@
 package ct.level3;
 
 import java.util.Arrays;
+import java.util.LinkedList;
 import java.util.Stack;
 
 // 표 편집
 public class CTEditeTable {
 
-    boolean[] table;
-    Stack<Integer> delete = new Stack<>();
-    int loc;
-    int last;
+    static Stack<Integer> del = new Stack<>();
+    static LinkedList<Integer> linkedList;
+    static int loc;
+    static  StringBuilder sb;
 
     public String solution(int n, int k, String[] cmd) {
         String answer = "";
-        table = new boolean[n];
-        for(int i=0; i < table.length; i++) table[i] = true;
+        linkedList = new LinkedList<Integer>();
+        sb = new StringBuilder();
+        for (int i=0; i < n; i++) sb.append("X");
+        for(int i=0 ; i < n ; i++) linkedList.add(i);
         loc = k;
-        last = n-1;
-
 
         for(String c : cmd) {
-            String[] s = c.split(" ");
-
-            switch (s[0]){
-                case "U": up(Integer.parseInt(s[1])); break;
-                case "D": down(Integer.parseInt(s[1])); break;
-                case "C": del(); break;
-                case "Z": restore(); break;
+            String[] arr = c.split(" ");
+            switch (arr[0]) {
+                case "U": u(Integer.parseInt(arr[1])); break;
+                case "D": d(Integer.parseInt(arr[1])); break;
+                case "C": c(); break;
+                case "Z": z(); break;
             }
-
         }
 
-       for (boolean b : table) {
-           if(b) answer += "O";
-           else answer += "X";
-       }
+        for(int l : linkedList) {
+            sb.setCharAt(l, 'O');
+        }
+
+        answer = sb.toString();
+
         return answer;
     }
 
-    public void up(int k) {
-        int temp = 0;
-        for(int i=loc-1 ; i >=0 ; i--){
-            if(k == 0) break;
+    public static void u(int k) {
+        loc = loc - k < 0 ? 0 : loc - k;
+    }
 
-            if(table[i]) {
-                temp = i;
-                k--;
+    public static void d(int k) {
+        loc = loc + k > linkedList.size() - 1 ? linkedList.size() - 1  : loc + k;
+    }
+
+    public static void c() {
+        if(linkedList.size() - 1 == loc) {
+            loc--;
+            del.add(linkedList.getLast());
+            linkedList.removeLast();
+        } else {
+            del.add(loc);
+            linkedList.remove(loc);
+        }
+    }
+
+    public static void z() {
+        int n = del.pop();
+        if(n < loc) loc++;
+        if(n <  linkedList.getFirst()) linkedList.addFirst(n);
+        else if(n > linkedList.getLast()) linkedList.addLast(n);
+        else {
+            for(int i=1 ; i < linkedList.size(); i++) {
+                if(n > linkedList.get(i)) {
+                    linkedList.add(i-1, n);
+                    break;
+                }
             }
         }
-        loc = temp;
     }
 
-    public void down(int k) {
-        int temp = 0;
-        for(int i=loc+1 ; i <= table.length ; i++){
-            if(k == 0) break;
 
-            if(table[i]) {
-                temp = i;
-                k--;
-            }
-        }
-        loc = temp;
-    }
-
-    public void del() {
-        table[loc] = false;
-        delete.push(loc);
-        if(loc == last) loc = last - 1;
-        else loc += 1;
-    }
-
-    public void restore() {
-        int s = delete.pop();
-        table[s] = true;
-        if(s > last) last = s;
-    }
 }
