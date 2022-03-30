@@ -7,70 +7,69 @@ import java.util.Stack;
 // 표 편집
 public class CTEditeTable {
 
-    static Stack<Integer> del = new Stack<>();
-    static LinkedList<Integer> linkedList;
-    static int loc;
-    static  StringBuilder sb;
+    class Node {
+        int prev, cur, next;
+        public Node(int prev, int cur, int next) {
+            this.prev = prev;
+            this.cur = cur;
+            this.next = next;
+        }
+    }
+
+    int loc;
+    Node[] table;
+    Stack<Node> del = new Stack<>();
+    StringBuilder builder;
 
     public String solution(int n, int k, String[] cmd) {
-        String answer = "";
-        linkedList = new LinkedList<Integer>();
-        sb = new StringBuilder();
-        for (int i=0; i < n; i++) sb.append("X");
-        for(int i=0 ; i < n ; i++) linkedList.add(i);
+        table = new Node[n];
+        builder = new StringBuilder();
+        for(int i=0; i < n ; i++) builder.append("O");
+        for(int i=0; i < n ; i++) table[i] = new Node(i-1, i, i+1);
+        table[n-1].next = -1;
         loc = k;
 
         for(String c : cmd) {
             String[] arr = c.split(" ");
+
             switch (arr[0]) {
-                case "U": u(Integer.parseInt(arr[1])); break;
-                case "D": d(Integer.parseInt(arr[1])); break;
-                case "C": c(); break;
-                case "Z": z(); break;
+
+                case "U": U(Integer.valueOf(arr[1])); break;
+                case "D": D(Integer.valueOf(arr[1])); break;
+                case "C": C(); break;
+                case "Z": Z(); break;
+
             }
+
         }
 
-        for(int l : linkedList) {
-            sb.setCharAt(l, 'O');
-        }
-
-        answer = sb.toString();
-
-        return answer;
+        return builder.toString();
     }
 
-    public static void u(int k) {
-        loc = loc - k < 0 ? 0 : loc - k;
+    public void U(int n) {
+        while (n-- > 0) loc = table[loc].prev;
     }
 
-    public static void d(int k) {
-        loc = loc + k > linkedList.size() - 1 ? linkedList.size() - 1  : loc + k;
+    public void D(int n) {
+        while (n-- > 0) loc = table[loc].next;
     }
 
-    public static void c() {
-        if(linkedList.size() - 1 == loc) {
-            loc--;
-            del.add(linkedList.getLast());
-            linkedList.removeLast();
-        } else {
-            del.add(loc);
-            linkedList.remove(loc);
-        }
+    public void C() {
+        del.add(table[loc]);
+        if (table[loc].next != -1) table[table[loc].next].prev = table[loc].prev;
+        if (table[loc].prev != -1) table[table[loc].prev].next = table[loc].next;
+        builder.setCharAt(loc, 'X');
+
+        if(table[loc].next != -1) loc = table[loc].next;
+        else loc = table[loc].prev;
     }
 
-    public static void z() {
-        int n = del.pop();
-        if(n < loc) loc++;
-        if(n <  linkedList.getFirst()) linkedList.addFirst(n);
-        else if(n > linkedList.getLast()) linkedList.addLast(n);
-        else {
-            for(int i=1 ; i < linkedList.size(); i++) {
-                if(n > linkedList.get(i)) {
-                    linkedList.add(i-1, n);
-                    break;
-                }
-            }
-        }
+    public void Z() {
+        Node node = del.pop();
+        if(node.next != -1) table[node.next].prev = node.cur;
+        if(node.prev != -1) table[node.prev].next = node.cur;
+        builder.setCharAt(node.cur, 'O');
+
     }
 
 
