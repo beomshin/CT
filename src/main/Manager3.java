@@ -1,6 +1,7 @@
 package main;
 
 import ct.level3.CTEditeTable;
+import ct.level3.CTMistrustUser;
 import ct.level3.CTSaleToothBrush;
 
 import java.util.Arrays;
@@ -12,7 +13,7 @@ public class Manager3 {
 
 
 
-        System.out.println("1. 표 편집, 2. 다단계 칫솔 판매");
+        System.out.println("1. 표 편집, 2. 다단계 칫솔 판매, 3. 불량 사용자");
         System.out.print("번호 : ");
         int n = Integer.valueOf(sc.nextLine());
 
@@ -28,6 +29,12 @@ public class Manager3 {
                 String[] seller = {"young", "john", "tod", "emily", "mary"};
                 int[] amount = {12, 4, 2, 5, 10};
                 System.out.println(Arrays.toString(CTSaleToothBrush.solution(enroll, referral, seller, amount)));
+                break;
+            }
+            case 3: {
+                String[] users = {"frodo", "fradi", "crodo", "abc123", "frodoc"};
+                String[] banned =  {"fr*d*", "*rodo", "******", "******"};
+                System.out.println(CTMistrustUser.solution(users, banned));
                 break;
             }
         }
