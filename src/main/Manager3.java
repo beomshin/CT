@@ -1,8 +1,6 @@
 package main;
 
-import ct.level3.CTEditeTable;
-import ct.level3.CTMistrustUser;
-import ct.level3.CTSaleToothBrush;
+import ct.level3.*;
 
 import java.util.Arrays;
 import java.util.Scanner;
@@ -13,7 +11,7 @@ public class Manager3 {
 
 
 
-        System.out.println("1. 표 편집, 2. 다단계 칫솔 판매, 3. 불량 사용자");
+        System.out.println("1. 표 편집, 2. 다단계 칫솔 판매, 3. 불량 사용자, 4. GPS, 5. [카카오 인턴] 보석 쇼핑");
         System.out.print("번호 : ");
         int n = Integer.valueOf(sc.nextLine());
 
@@ -35,6 +33,16 @@ public class Manager3 {
                 String[] users = {"frodo", "fradi", "crodo", "abc123", "frodoc"};
                 String[] banned =  {"fr*d*", "*rodo", "******", "******"};
                 System.out.println(CTMistrustUser.solution(users, banned));
+                break;
+            }
+            case 4: {
+                int[][] edge = {{1, 2}, {1, 3}, {2, 3}, {2, 4}, {3, 4}, {3, 5}, {4, 6}, {5, 6}, {5, 7}, {6, 7}};
+                int[] gps = {1, 2, 3, 3, 6, 7};
+                System.out.println(CTGPS.solution(7, 10, edge, 6, gps));
+            }
+            case 5: {
+                String[] s3 = {"DIA", "RUBY", "RUBY", "DIA", "DIA", "EMERALD", "SAPPHIRE", "DIA"};
+                System.out.println(Arrays.toString(CTJewelry.solution(s3)));
                 break;
             }
         }
