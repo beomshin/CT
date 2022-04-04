@@ -36,6 +36,7 @@ public class CTInstallRoad {
         dfs(x , y-1, board, 1, d == 1 ? fee + 100 : fee + 600);
 
         board[x][y] = 0;
+
     }
 
 }
