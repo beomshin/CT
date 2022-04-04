@@ -12,6 +12,7 @@ public class Manager3 {
 
 
         System.out.println("1. 표 편집, 2. 다단계 칫솔 판매, 3. 불량 사용자, 4. GPS, 5. [카카오 인턴] 보석 쇼핑");
+        System.out.println("6. [카카오 인턴] 경주로 건설");
         System.out.print("번호 : ");
         int n = Integer.valueOf(sc.nextLine());
 
@@ -43,6 +44,11 @@ public class Manager3 {
             case 5: {
                 String[] s3 = {"DIA", "RUBY", "RUBY", "DIA", "DIA", "EMERALD", "SAPPHIRE", "DIA"};
                 System.out.println(Arrays.toString(CTJewelry.solution(s3)));
+                break;
+            }
+            case 6: {
+                int[][] s4 = {{0,0,0},{0,0,0},{0,0,0}};
+                System.out.println(CTInstallRoad.solution(s4));
                 break;
             }
         }
