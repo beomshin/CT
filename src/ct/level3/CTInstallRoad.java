@@ -1,42 +1,71 @@
 package ct.level3;
 
-import java.util.ArrayList;
+import java.util.*;
 
-// [카카오 인턴] 경주로 건설
+    // [카카오 인턴] 경주로 건설
 public class CTInstallRoad {
 
-
-    static int N = 0;
+    static int[][] dd = {{1,0}, {-1, 0}, {0, 1}, {0, -1}};
+    static boolean[][] visited;
     static int min = Integer.MAX_VALUE;
-
-    // 아래 0 왼 1 위 2 오 3
+    static int N;
     public static int solution(int[][] board) {
         int answer = 0;
-        N = board.length-1;
-        ArrayList<Integer> list = new ArrayList<>();
-        dfs(0, 0 , board, 3, 0);
-        dfs(0, 0 , board, 0, 0);
+        N = board.length;
+        visited = new boolean[N][N];
+        bfs(board);
         answer = min;
         return answer;
     }
 
+    public static void bfs(int[][] board) {
+        Queue<Node> q = new LinkedList<>();
+        q.add(new Node(0, 0, -1, 0));
+        visited[0][0] = true;
 
-    public static void dfs(int x, int y, int[][] board, int d, int fee) {
-        if(x < 0 || x > board.length -1 || y < 0 || y > board.length - 1 || board[x][y] == 1) return;
+        while (!q.isEmpty()) {
 
-        if(x == N && y == N) {
-            if(fee < min) min = fee;
+            Node n = q.poll();
+
+            if(n.x == board.length -1 && n.y == board.length -1) {
+                System.out.println(n.fee);
+                min = Math.min(n.fee, min);
+            }
+
+            // 아래 0 위 1 오 2 왼 3
+            for (int i=0 ; i < 4; i++) {
+                int x = n.x + dd[i][0];
+                int y = n.y + dd[i][1];
+
+                if(x >= 0 && x < N  && y >= 0 && y < N   && board[x][y] != 1 ) {
+
+                    int cost = 0;
+                    if(n.d == -1 || n.d == i) cost = n.fee + 100;
+                    else cost = n.fee + 600;
+
+                    if(!visited[x][y] || board[x][y] >= cost) {
+                        visited[x][y] = true;
+                        board[x][y] = cost;
+                        q.add(new Node(x, y, i, cost));
+                    }
+
+                }
+
+            }
         }
 
-        board[x][y] = 1;
-
-        dfs(x+1 , y, board, 0 , d == 0 ? fee + 100 : fee + 600);
-        dfs(x-1 , y, board, 2, d == 2 ? fee + 100 : fee + 600);
-        dfs(x , y+1, board, 3, d == 3 ? fee + 100 : fee + 600);
-        dfs(x , y-1, board, 1, d == 1 ? fee + 100 : fee + 600);
-
-        board[x][y] = 0;
-
     }
+
+    static class Node {
+        int x,y,d,fee;
+        public Node(int x, int y, int d, int fee) {
+            this.x=x;
+            this.y=y;
+            this.d=d;
+            this.fee=fee;
+        }
+    }
+
+
 
 }
