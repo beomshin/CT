@@ -12,7 +12,7 @@ public class Manager3 {
 
 
         System.out.println("1. 표 편집, 2. 다단계 칫솔 판매, 3. 불량 사용자, 4. GPS, 5. [카카오 인턴] 보석 쇼핑");
-        System.out.println("6. [카카오 인턴] 경주로 건설, 7. 여행경로");
+        System.out.println("6. [카카오 인턴] 경주로 건설, 7. 여행경로, 8. 2 x n 타일링");
         System.out.print("번호 : ");
         int n = Integer.valueOf(sc.nextLine());
 
@@ -54,6 +54,10 @@ public class Manager3 {
             case 7: {
                 String[][] s5 = {{"ICN", "SFO"}, {"ICN", "ATL"}, {"SFO", "ATL"}, {"ATL", "ICN"}, {"ATL","SFO"}};
                 System.out.println(Arrays.toString(CTTravelRoute.solution(s5)));
+                break;
+            }
+            case 8: {
+                System.out.println(CT2Ntile.solution(7));
                 break;
             }
         }
