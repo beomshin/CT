@@ -4,41 +4,36 @@ package ct.level3;
 public class CTPedestrian {
 
     static int MOD = 20170805;
-    static int answer = 0;
-    static int X,Y;
-    static boolean[][] visited;
 
     // 0 1 2 3
     public static int solution(int m, int n, int[][] cityMap) {
-        X = m-1;
-        Y = n-1;
-        visited = new boolean[m][n];
-        dfs(0,0, -1, cityMap);
-        return answer%MOD;
-    }
+        int answer = 0;
+        int[][][] dp = new int[m+1][n+1][2];
 
-    public static void dfs(int x, int y, int d, int[][] cityMap) {
-        if(x < 0 || x > X || y < 0 || y > Y || cityMap[x][y] == 1 || visited[x][y]) return;
-        if(x == X && y== Y) {
-            answer++;
+        dp[1][1][0] = 1;
+        dp[1][1][1] = 1;
+
+        for(int i=1; i <= m; i++) {
+            for(int j=1; j <=n; j++) {
+                int flag = cityMap[i-1][j-1];
+                if(flag == 0) {
+                    dp[i][j][0] += (dp[i-1][j][0] + dp[i][j-1][1])%MOD;
+                    dp[i][j][1] += (dp[i-1][j][0] + dp[i][j-1][1])%MOD;
+                }else if(flag == 1){
+                    dp[i][j][0] = 0;
+                    dp[i][j][1] = 0;
+                }else if(flag == 2){
+                    dp[i][j][0] = dp[i-1][j][0];
+                    dp[i][j][1] = dp[i][j-1][1];
+                }
+            }
         }
 
-        visited[x][y] = true;
 
-        if(cityMap[x][y] == 2) {
-
-            if(d==0) dfs(x+1, y, 0 , cityMap); // 아래
-            else if(d==1) dfs(x, y+1, 1 , cityMap); // 옆
-
-        } else if(cityMap[x][y] == 0){
-
-            dfs(x+1, y, 0 , cityMap);
-            dfs(x, y+1, 1 , cityMap);
-        }
-
-        visited[x][y] = false;
-
+        answer = dp[m][n-1][1] + dp[m-1][n][0];
+        return answer;
     }
+
 
 
 }
