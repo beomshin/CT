@@ -13,6 +13,7 @@ public class Manager3 {
 
         System.out.println("1. 표 편집, 2. 다단계 칫솔 판매, 3. 불량 사용자, 4. GPS, 5. [카카오 인턴] 보석 쇼핑");
         System.out.println("6. [카카오 인턴] 경주로 건설, 7. 여행경로, 8. 2 x n 타일링, 9. 보행자 천국, 10.징검다리 건너기");
+        System.out.println("11. 블록 이동하기");
         System.out.print("번호 : ");
         int n = Integer.valueOf(sc.nextLine());
 
@@ -68,6 +69,10 @@ public class Manager3 {
             case 10: {
                 int[] s6 = {2, 4, 5, 3, 2, 1, 4, 2, 5, 1};
                 System.out.println(CTSteppingStone.solution(s6,3));
+            }
+            case 11: {
+                int[][] s7 = {{0, 0, 0, 1, 1},{0, 0, 0, 1, 0},{0, 1, 0, 1, 1},{1, 1, 0, 0, 1},{0, 0, 0, 0, 0}};
+                System.out.println(CTMoveBlock.solution(s7));
             }
         }
 
